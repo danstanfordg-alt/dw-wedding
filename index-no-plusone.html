@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daniel & Wayne — Wedding Celebration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cormorant+SC:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-deep:   #1a3028;
+      --green-mid:    #1f3c30;
+      --green-light:  #2a4d3e;
+      --cream:        #f5efe6;
+      --cream-dim:    rgba(245, 239, 230, 0.75);
+      --cream-faint:  rgba(245, 239, 230, 0.35);
+      --gold:         #c9a96e;
+      --gold-faint:   rgba(201, 169, 110, 0.25);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--green-deep);
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Noise / texture overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.045;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Radial glow ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 55% at 50% 30%, rgba(42,77,62,0.55) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Page sections ── */
+    .page { position: relative; z-index: 1; }
+
+    /* ════════════════════════════
+       HERO
+    ════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem 5rem;
+    }
+
+    /* Monogram */
+    .monogram {
+      font-family: 'Cormorant SC', serif;
+      font-size: clamp(5rem, 15vw, 9rem);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      color: var(--cream);
+      animation: fadeUp 1.2s cubic-bezier(.22,1,.36,1) both;
+      animation-delay: 0.1s;
+    }
+
+    .monogram .amp {
+      font-size: 0.55em;
+      vertical-align: middle;
+      opacity: 0.7;
+      color: var(--gold);
+    }
+
+    /* Divider */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem 0;
+      animation: fadeUp 1.2s cubic-bezier(.22,1,.36,1) both;
+      animation-delay: 0.25s;
+    }
+    .divider-line {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-faint), var(--gold));
+    }
+    .divider-line.right {
+      background: linear-gradient(to left, transparent, var(--gold-faint), var(--gold));
+    }
+
+    /* Glass icon */
+    .glass-icon {
+      width: 48px;
+      opacity: 0.85;
+      animation: fadeUp 1.2s cubic-bezier(.22,1,.36,1) both;
+      animation-delay: 0.25s;
+    }
+
+    /* Headline */
+    .headline {
+      font-size: clamp(1.5rem, 4.5vw, 2.6rem);
+      font-weight: 300;
+      line-height: 1.4;
+      max-width: 560px;
+      color: var(--cream);
+      animation: fadeUp 1.2s cubic-bezier(.22,1,.36,1) both;
+      animation-delay: 0.4s;
+    }
+
+    /* Date & venue */
+    .event-details {
+      margin-top: 2.8rem;
+      animation: fadeUp 1.2s cubic-bezier(.22,1,.36,1) both;
+      animation-delay: 0.55s;
+    }
+    .event-date {
+      font-family: 'Cormorant SC', serif;
+      font-size: clamp(1.15rem, 3vw, 1.6rem);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--cream);
+    }
+    .event-time {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-weight: 300;
+      color: var(--cream-dim);
+      margin-top: 0.3rem;
+      font-style: italic;
+    }
+    .event-venue {
+      margin-top: 1.2rem;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.6;
+    }
+    .event-venue .postcode {
+      font-family: 'Cormorant SC', serif;
+      font-size: 0.9em;
+      opacity: 0.6;
+      display: block;
+      margin-top: 0.2rem;
+    }
+
+    /* Gift note */
+    .gift-note {
+      margin-top: 3rem;
+      max-width: 520px;
+      font-size: clamp(0.9rem, 2vw, 1.05rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream-dim);
+      line-height: 1.75;
+      animation: fadeUp 1.2s cubic-bezier(.22,1,.36,1) both;
+      animation-delay: 0.7s;
+    }
+
+    /* Gift button */
+    .btn-gift {
+      display: inline-block;
+      margin-top: 1.6rem;
+      padding: 0.75rem 2.5rem;
+      border: 1px solid rgba(245,239,230,0.45);
+      border-radius: 50px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--cream);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      background: transparent;
+      transition: background 0.3s, border-color 0.3s, color 0.3s;
+      animation: fadeUp 1.2s cubic-bezier(.22,1,.36,1) both;
+      animation-delay: 0.85s;
+      cursor: pointer;
+    }
+    .btn-gift:hover {
+      background: rgba(245,239,230,0.1);
+      border-color: var(--cream);
+    }
+
+    /* Scroll cue */
+    .scroll-cue {
+      margin-top: 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--cream-faint);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      animation: fadeUp 1.4s cubic-bezier(.22,1,.36,1) both;
+      animation-delay: 1.1s;
+    }
+    .scroll-cue svg { opacity: 0.4; animation: bounce 2.2s ease-in-out infinite; }
+
+    /* ════════════════════════════
+       RSVP SECTION
+    ════════════════════════════ */
+    .rsvp-section {
+      padding: 6rem 2rem 8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .section-label {
+      font-family: 'Cormorant SC', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-heading {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 300;
+      text-align: center;
+      color: var(--cream);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--cream-dim);
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    /* Card */
+    .rsvp-card {
+      width: 100%;
+      max-width: 560px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(245,239,230,0.12);
+      border-radius: 4px;
+      padding: clamp(2rem, 5vw, 3.5rem);
+      backdrop-filter: blur(8px);
+    }
+
+    /* Form elements */
+    .form-group {
+      margin-bottom: 1.6rem;
+    }
+
+    label {
+      display: block;
+      font-family: 'Cormorant SC', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      color: var(--cream-dim);
+      text-transform: uppercase;
+      margin-bottom: 0.55rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    textarea,
+    select {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(245,239,230,0.2);
+      border-radius: 2px;
+      padding: 0.85rem 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--cream);
+      outline: none;
+      transition: border-color 0.25s, background 0.25s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    input::placeholder, textarea::placeholder { color: rgba(245,239,230,0.3); font-style: italic; }
+    input:focus, textarea:focus, select:focus {
+      border-color: rgba(245,239,230,0.55);
+      background: rgba(255,255,255,0.09);
+    }
+
+    select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(245,239,230,0.5)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+    select option { background: var(--green-deep); color: var(--cream); }
+
+    textarea { resize: vertical; min-height: 90px; }
+
+    /* RSVP toggle */
+    .rsvp-toggle {
+      display: flex;
+      gap: 0;
+      border: 1px solid rgba(245,239,230,0.2);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .rsvp-toggle input[type="radio"] { display: none; }
+    .rsvp-toggle label {
+      flex: 1;
+      margin: 0;
+      padding: 0.85rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      transition: background 0.2s, color 0.2s;
+      border: none;
+      color: var(--cream-dim);
+    }
+    .rsvp-toggle input:checked + label {
+      background: rgba(245,239,230,0.12);
+      color: var(--cream);
+    }
+    .rsvp-toggle label:not(:last-child) {
+      border-right: 1px solid rgba(245,239,230,0.2);
+    }
+
+    /* Conditional fields */
+    .conditional { transition: opacity 0.35s, max-height 0.4s; overflow: hidden; }
+    .conditional.hidden { opacity: 0; max-height: 0; pointer-events: none; }
+    .conditional.visible { opacity: 1; max-height: 400px; }
+
+    /* Submit button */
+    .btn-submit {
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 1rem;
+      background: transparent;
+      border: 1px solid rgba(245,239,230,0.5);
+      border-radius: 2px;
+      font-family: 'Cormorant SC', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.22em;
+      color: var(--cream);
+      cursor: pointer;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .btn-submit:hover { background: rgba(245,239,230,0.1); border-color: var(--cream); }
+    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* Success state */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 3rem 1rem;
+      animation: fadeUp 0.7s ease both;
+    }
+    .form-success .success-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .form-success h3 {
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--cream);
+      margin-bottom: 0.8rem;
+    }
+    .form-success p { font-style: italic; color: var(--cream-dim); line-height: 1.7; }
+
+    /* ── Form error message ── */
+    .form-error {
+      display: none;
+      background: rgba(180,50,50,0.15);
+      border: 1px solid rgba(180,50,50,0.4);
+      border-radius: 2px;
+      padding: 0.8rem 1rem;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #f5a0a0;
+      text-align: center;
+    }
+
+    /* ════════════════════════════
+       FOOTER
+    ════════════════════════════ */
+    footer {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      border-top: 1px solid rgba(245,239,230,0.08);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      color: var(--cream-faint);
+      font-family: 'Cormorant SC', serif;
+    }
+
+    /* ════════════════════════════
+       ANIMATIONS
+    ════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(6px); }
+    }
+
+    /* ════════════════════════════
+       RESPONSIVE
+    ════════════════════════════ */
+    @media (max-width: 480px) {
+      .rsvp-card { padding: 2rem 1.4rem; }
+      .divider-line { width: 48px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ═══════ HERO ═══════ -->
+    <section class="hero">
+      <div class="monogram">D<span class="amp">&amp;</span>W</div>
+
+      <div class="divider">
+        <span class="divider-line"></span>
+        <!-- Martini glass SVG (line-art matching invite) -->
+        <svg class="glass-icon" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 8 L30 48 L55 8 Z" stroke="rgba(245,239,230,0.85)" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+          <line x1="30" y1="48" x2="30" y2="78" stroke="rgba(245,239,230,0.85)" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="16" y1="78" x2="44" y2="78" stroke="rgba(245,239,230,0.85)" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M10 16 Q22 22 30 30 Q38 22 50 16" stroke="rgba(201,169,110,0.4)" stroke-width="1.2" fill="none"/>
+        </svg>
+        <span class="divider-line right"></span>
+      </div>
+
+      <h1 class="headline">Daniel and Wayne would like to invite you to celebrate our wedding</h1>
+
+      <div class="event-details">
+        <p class="event-date">Saturday 11th July</p>
+        <p class="event-time">19:00 until late</p>
+        <p class="event-venue">
+          Innlodge Hotel<br>
+          Burrfields Road, Portsmouth
+          <span class="postcode">PO3 5HH</span>
+        </p>
+      </div>
+
+      <p class="gift-note">
+        Your presence is the greatest gift. We're lucky to have all the material things we need, so no gifts are expected. If you wish, we've set up an adventure fund to help us make lasting memories — something so valuable to us both.
+      </p>
+
+      <!-- Replace href="#" with your actual gift link -->
+      <a href="#" class="btn-gift" target="_blank" rel="noopener">Gift Here</a>
+
+      <div class="scroll-cue">
+        <span>RSVP</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 5.5L8 10.5L13 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ═══════ RSVP ═══════ -->
+    <section class="rsvp-section" id="rsvp">
+      <p class="section-label">Kindly Reply</p>
+      <h2 class="section-heading">Will you join us?</h2>
+      <p class="section-sub">Please let us know by 30th June</p>
+
+      <div class="rsvp-card">
+
+        <!-- SUCCESS STATE (shown after submission) -->
+        <div class="form-success" id="formSuccess">
+          <div class="success-icon">🥂</div>
+          <h3>Thank you!</h3>
+          <p>We've received your RSVP.<br>We can't wait to celebrate with you.</p>
+        </div>
+
+        <!-- THE FORM -->
+        <!-- 
+          ┌──────────────────────────────────────────────────────────────────┐
+          │  FREE HOSTING INSTRUCTIONS                                       │
+          │                                                                  │
+          │  STEP 1 — Sign up at https://formspree.io (free tier = 50       │
+          │            submissions/month, plenty for a wedding)              │
+          │                                                                  │
+          │  STEP 2 — Create a new form and copy your endpoint, e.g.:        │
+          │            https://formspree.io/f/xyzabcde                       │
+          │                                                                  │
+          │  STEP 3 — Replace the action attribute below with your endpoint  │
+          │                                                                  │
+          │  STEP 4 — Host the file on GitHub Pages (free):                 │
+          │            • Push this .html file to a GitHub repo              │
+          │            • Go to Settings → Pages → Deploy from main branch   │
+          │            • Your site will be at username.github.io/repo-name  │
+          └──────────────────────────────────────────────────────────────────┘
+        -->
+        <form id="rsvpForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+
+          <!-- Name -->
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required />
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required />
+          </div>
+
+          <!-- Attending toggle -->
+          <div class="form-group">
+            <label>Will you be attending?</label>
+            <div class="rsvp-toggle">
+              <input type="radio" id="attending-yes" name="attending" value="Joyfully Accepts" required />
+              <label for="attending-yes">Joyfully Accepts</label>
+              <input type="radio" id="attending-no" name="attending" value="Regretfully Declines" />
+              <label for="attending-no">Regretfully Declines</label>
+            </div>
+          </div>
+
+          <!-- Fields shown only when attending -->
+          <div class="conditional hidden" id="attendingFields">
+
+            <!-- Number of guests -->
+            <div class="form-group">
+              <label for="guests">Number of Guests (including yourself)</label>
+              <select id="guests" name="guests">
+                <option value="1">1 — Just me</option>
+                <option value="2">2 — Me & my plus one</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+            </div>
+
+            <!-- Dietary requirements -->
+            <div class="form-group">
+              <label for="dietary">Dietary Requirements</label>
+              <input type="text" id="dietary" name="dietary" placeholder="Vegetarian, allergies, etc. (or leave blank)" />
+            </div>
+
+          </div>
+
+          <!-- Message -->
+          <div class="form-group">
+            <label for="message">Message for Daniel &amp; Wayne <em style="font-size:0.85em;opacity:0.6">(optional)</em></label>
+            <textarea id="message" name="message" placeholder="Share a kind word…"></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit" id="submitBtn">Send RSVP</button>
+          <div class="form-error" id="formError">Something went wrong — please try again or email us directly.</div>
+
+        </form>
+      </div>
+    </section>
+
+    <!-- ═══════ FOOTER ═══════ -->
+    <footer>
+      D &amp; W &nbsp;·&nbsp; Saturday 11th July &nbsp;·&nbsp; Portsmouth
+    </footer>
+
+  </div><!-- /page -->
+
+  <script>
+    /* ── Show/hide attending fields ── */
+    const radios = document.querySelectorAll('input[name="attending"]');
+    const attendingFields = document.getElementById('attendingFields');
+
+    radios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        if (radio.value === 'Joyfully Accepts' && radio.checked) {
+          attendingFields.classList.remove('hidden');
+          attendingFields.classList.add('visible');
+        } else {
+          attendingFields.classList.add('hidden');
+          attendingFields.classList.remove('visible');
+        }
+      });
+    });
+
+    /* ── Form submission (Formspree AJAX) ── */
+    const form = document.getElementById('rsvpForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formSuccess = document.getElementById('formSuccess');
+    const formError = document.getElementById('formError');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      formError.style.display = 'none';
+
+      // Basic validation
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const attending = document.querySelector('input[name="attending"]:checked');
+
+      if (!name || !email || !attending) {
+        formError.textContent = 'Please fill in your name, email, and RSVP choice.';
+        formError.style.display = 'block';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      try {
+        const data = new FormData(form);
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          form.style.display = 'none';
+          formSuccess.style.display = 'block';
+        } else {
+          throw new Error('Server error');
+        }
+      } catch {
+        formError.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send RSVP';
+      }
+    });
+
+    /* ── Scroll-triggered fade-in for RSVP section ── */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = 'fadeUp 0.9s cubic-bezier(.22,1,.36,1) both';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.section-label, .section-heading, .section-sub, .rsvp-card')
+      .forEach(el => {
+        el.style.opacity = '0';
+        observer.observe(el);
+      });
+  </script>
+</body>
+</html>
