@@ -4,6 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Daniel & Wayne — Wedding Celebration</title>
+
+  <!-- Social media preview tags -->
+  <meta property="og:title" content="You're Invited 🥂 — Please RSVP" />
+  <meta property="og:description" content="Daniel & Wayne are getting married! Saturday 11th July at Innlodge Hotel, Portsmouth. Tap to confirm your attendance." />
+  <meta property="og:image" content="https://danstanfordg-alt.github.io/dw-wedding/photo.jpg" />
+  <meta property="og:url" content="https://danstanfordg-alt.github.io/dw-wedding/index-no-plusone.html" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="You're Invited 🥂 — Please RSVP" />
+  <meta name="twitter:description" content="Daniel & Wayne are getting married! Saturday 11th July at Innlodge Hotel, Portsmouth. Tap to confirm your attendance." />
+  <meta name="twitter:image" content="https://danstanfordg-alt.github.io/dw-wedding/photo.jpg" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cormorant+SC:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
@@ -32,7 +44,6 @@
       overflow-x: hidden;
     }
 
-    /* ── Noise / texture overlay ── */
     body::before {
       content: '';
       position: fixed;
@@ -43,7 +54,6 @@
       z-index: 0;
     }
 
-    /* ── Radial glow ── */
     body::after {
       content: '';
       position: fixed;
@@ -53,12 +63,8 @@
       z-index: 0;
     }
 
-    /* ── Page sections ── */
     .page { position: relative; z-index: 1; }
 
-    /* ════════════════════════════
-       HERO
-    ════════════════════════════ */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -69,7 +75,6 @@
       padding: 4rem 2rem 5rem;
     }
 
-    /* Monogram */
     .monogram {
       font-family: 'Cormorant SC', serif;
       font-size: clamp(5rem, 15vw, 9rem);
@@ -88,7 +93,6 @@
       color: var(--gold);
     }
 
-    /* Divider */
     .divider {
       display: flex;
       align-items: center;
@@ -106,7 +110,6 @@
       background: linear-gradient(to left, transparent, var(--gold-faint), var(--gold));
     }
 
-    /* Glass icon */
     .glass-icon {
       width: 48px;
       opacity: 0.85;
@@ -114,7 +117,6 @@
       animation-delay: 0.25s;
     }
 
-    /* Headline */
     .headline {
       font-size: clamp(1.5rem, 4.5vw, 2.6rem);
       font-weight: 300;
@@ -125,7 +127,6 @@
       animation-delay: 0.4s;
     }
 
-    /* Date & venue */
     .event-details {
       margin-top: 2.8rem;
       animation: fadeUp 1.2s cubic-bezier(.22,1,.36,1) both;
@@ -160,7 +161,6 @@
       margin-top: 0.2rem;
     }
 
-    /* Gift note */
     .gift-note {
       margin-top: 3rem;
       max-width: 520px;
@@ -173,7 +173,6 @@
       animation-delay: 0.7s;
     }
 
-    /* Gift button */
     .btn-gift {
       display: inline-block;
       margin-top: 1.6rem;
@@ -197,7 +196,6 @@
       border-color: var(--cream);
     }
 
-    /* Scroll cue */
     .scroll-cue {
       margin-top: 4rem;
       display: flex;
@@ -213,9 +211,6 @@
     }
     .scroll-cue svg { opacity: 0.4; animation: bounce 2.2s ease-in-out infinite; }
 
-    /* ════════════════════════════
-       RSVP SECTION
-    ════════════════════════════ */
     .rsvp-section {
       padding: 6rem 2rem 8rem;
       display: flex;
@@ -248,7 +243,6 @@
       margin-bottom: 3rem;
     }
 
-    /* Card */
     .rsvp-card {
       width: 100%;
       max-width: 560px;
@@ -259,10 +253,7 @@
       backdrop-filter: blur(8px);
     }
 
-    /* Form elements */
-    .form-group {
-      margin-bottom: 1.6rem;
-    }
+    .form-group { margin-bottom: 1.6rem; }
 
     label {
       display: block;
@@ -276,9 +267,7 @@
 
     input[type="text"],
     input[type="email"],
-    input[type="number"],
-    textarea,
-    select {
+    textarea {
       width: 100%;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(245,239,230,0.2);
@@ -293,23 +282,13 @@
       appearance: none;
     }
     input::placeholder, textarea::placeholder { color: rgba(245,239,230,0.3); font-style: italic; }
-    input:focus, textarea:focus, select:focus {
+    input:focus, textarea:focus {
       border-color: rgba(245,239,230,0.55);
       background: rgba(255,255,255,0.09);
     }
 
-    select {
-      cursor: pointer;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(245,239,230,0.5)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 1rem center;
-      padding-right: 2.5rem;
-    }
-    select option { background: var(--green-deep); color: var(--cream); }
-
     textarea { resize: vertical; min-height: 90px; }
 
-    /* RSVP toggle */
     .rsvp-toggle {
       display: flex;
       gap: 0;
@@ -338,12 +317,10 @@
       border-right: 1px solid rgba(245,239,230,0.2);
     }
 
-    /* Conditional fields */
     .conditional { transition: opacity 0.35s, max-height 0.4s; overflow: hidden; }
     .conditional.hidden { opacity: 0; max-height: 0; pointer-events: none; }
-    .conditional.visible { opacity: 1; max-height: 400px; }
+    .conditional.visible { opacity: 1; max-height: 200px; }
 
-    /* Submit button */
     .btn-submit {
       width: 100%;
       margin-top: 0.5rem;
@@ -361,7 +338,6 @@
     .btn-submit:hover { background: rgba(245,239,230,0.1); border-color: var(--cream); }
     .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
 
-    /* Success state */
     .form-success {
       display: none;
       text-align: center;
@@ -377,7 +353,6 @@
     }
     .form-success p { font-style: italic; color: var(--cream-dim); line-height: 1.7; }
 
-    /* ── Form error message ── */
     .form-error {
       display: none;
       background: rgba(180,50,50,0.15);
@@ -390,9 +365,6 @@
       text-align: center;
     }
 
-    /* ════════════════════════════
-       FOOTER
-    ════════════════════════════ */
     footer {
       text-align: center;
       padding: 2.5rem 2rem;
@@ -403,9 +375,6 @@
       font-family: 'Cormorant SC', serif;
     }
 
-    /* ════════════════════════════
-       ANIMATIONS
-    ════════════════════════════ */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(22px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -415,9 +384,6 @@
       50%       { transform: translateY(6px); }
     }
 
-    /* ════════════════════════════
-       RESPONSIVE
-    ════════════════════════════ */
     @media (max-width: 480px) {
       .rsvp-card { padding: 2rem 1.4rem; }
       .divider-line { width: 48px; }
@@ -427,13 +393,11 @@
 <body>
   <div class="page">
 
-    <!-- ═══════ HERO ═══════ -->
     <section class="hero">
       <div class="monogram">D<span class="amp">&amp;</span>W</div>
 
       <div class="divider">
         <span class="divider-line"></span>
-        <!-- Martini glass SVG (line-art matching invite) -->
         <svg class="glass-icon" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M5 8 L30 48 L55 8 Z" stroke="rgba(245,239,230,0.85)" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
           <line x1="30" y1="48" x2="30" y2="78" stroke="rgba(245,239,230,0.85)" stroke-width="1.8" stroke-linecap="round"/>
@@ -459,8 +423,7 @@
         Your presence is the greatest gift. We're lucky to have all the material things we need, so no gifts are expected. If you wish, we've set up an adventure fund to help us make lasting memories — something so valuable to us both.
       </p>
 
-      <!-- Replace href="#" with your actual gift link -->
-      <a href="#" class="btn-gift" target="_blank" rel="noopener">Gift Here</a>
+      <a href="https://www.weddingshop.com/giftlist/danielandwayne" class="btn-gift" target="_blank" rel="noopener">Gift Here</a>
 
       <div class="scroll-cue">
         <span>RSVP</span>
@@ -470,7 +433,6 @@
       </div>
     </section>
 
-    <!-- ═══════ RSVP ═══════ -->
     <section class="rsvp-section" id="rsvp">
       <p class="section-label">Kindly Reply</p>
       <h2 class="section-heading">Will you join us?</h2>
@@ -478,47 +440,24 @@
 
       <div class="rsvp-card">
 
-        <!-- SUCCESS STATE (shown after submission) -->
         <div class="form-success" id="formSuccess">
           <div class="success-icon">🥂</div>
           <h3>Thank you!</h3>
           <p>We've received your RSVP.<br>We can't wait to celebrate with you.</p>
         </div>
 
-        <!-- THE FORM -->
-        <!-- 
-          ┌──────────────────────────────────────────────────────────────────┐
-          │  FREE HOSTING INSTRUCTIONS                                       │
-          │                                                                  │
-          │  STEP 1 — Sign up at https://formspree.io (free tier = 50       │
-          │            submissions/month, plenty for a wedding)              │
-          │                                                                  │
-          │  STEP 2 — Create a new form and copy your endpoint, e.g.:        │
-          │            https://formspree.io/f/xyzabcde                       │
-          │                                                                  │
-          │  STEP 3 — Replace the action attribute below with your endpoint  │
-          │                                                                  │
-          │  STEP 4 — Host the file on GitHub Pages (free):                 │
-          │            • Push this .html file to a GitHub repo              │
-          │            • Go to Settings → Pages → Deploy from main branch   │
-          │            • Your site will be at username.github.io/repo-name  │
-          └──────────────────────────────────────────────────────────────────┘
-        -->
-        <form id="rsvpForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+        <form id="rsvpForm" action="https://formspree.io/f/xkoygynd" method="POST" novalidate>
 
-          <!-- Name -->
           <div class="form-group">
             <label for="name">Full Name</label>
             <input type="text" id="name" name="name" placeholder="Your name" required />
           </div>
 
-          <!-- Email -->
           <div class="form-group">
             <label for="email">Email Address</label>
             <input type="email" id="email" name="email" placeholder="your@email.com" required />
           </div>
 
-          <!-- Attending toggle -->
           <div class="form-group">
             <label>Will you be attending?</label>
             <div class="rsvp-toggle">
@@ -529,29 +468,14 @@
             </div>
           </div>
 
-          <!-- Fields shown only when attending -->
+          <!-- Dietary shown only when attending — no guest number -->
           <div class="conditional hidden" id="attendingFields">
-
-            <!-- Number of guests -->
-            <div class="form-group">
-              <label for="guests">Number of Guests (including yourself)</label>
-              <select id="guests" name="guests">
-                <option value="1">1 — Just me</option>
-                <option value="2">2 — Me & my plus one</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-              </select>
-            </div>
-
-            <!-- Dietary requirements -->
             <div class="form-group">
               <label for="dietary">Dietary Requirements</label>
               <input type="text" id="dietary" name="dietary" placeholder="Vegetarian, allergies, etc. (or leave blank)" />
             </div>
-
           </div>
 
-          <!-- Message -->
           <div class="form-group">
             <label for="message">Message for Daniel &amp; Wayne <em style="font-size:0.85em;opacity:0.6">(optional)</em></label>
             <textarea id="message" name="message" placeholder="Share a kind word…"></textarea>
@@ -564,15 +488,13 @@
       </div>
     </section>
 
-    <!-- ═══════ FOOTER ═══════ -->
     <footer>
       D &amp; W &nbsp;·&nbsp; Saturday 11th July &nbsp;·&nbsp; Portsmouth
     </footer>
 
-  </div><!-- /page -->
+  </div>
 
   <script>
-    /* ── Show/hide attending fields ── */
     const radios = document.querySelectorAll('input[name="attending"]');
     const attendingFields = document.getElementById('attendingFields');
 
@@ -588,7 +510,6 @@
       });
     });
 
-    /* ── Form submission (Formspree AJAX) ── */
     const form = document.getElementById('rsvpForm');
     const submitBtn = document.getElementById('submitBtn');
     const formSuccess = document.getElementById('formSuccess');
@@ -598,7 +519,6 @@
       e.preventDefault();
       formError.style.display = 'none';
 
-      // Basic validation
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const attending = document.querySelector('input[name="attending"]:checked');
@@ -633,7 +553,6 @@
       }
     });
 
-    /* ── Scroll-triggered fade-in for RSVP section ── */
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
